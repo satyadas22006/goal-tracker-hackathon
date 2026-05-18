@@ -23,7 +23,7 @@ function ManagerDashboard() {
       const token = localStorage.getItem("token");
 
       const response = await axios.get(
-        "http://localhost:5000/api/goals/all",
+        "goal-tracker-hackathon-production.up.railway.app/api/goals/all",
         {
           headers: {
             authorization: token
@@ -47,7 +47,7 @@ function ManagerDashboard() {
       const token = localStorage.getItem("token");
 
       await axios.patch(
-        `http://localhost:5000/api/goals/approve/${id}`,
+        `goal-tracker-hackathon-production.up.railway.app/api/goals/approve/${id}`,
         {},
         {
           headers: {
@@ -75,7 +75,7 @@ function ManagerDashboard() {
       const token = localStorage.getItem("token");
 
       await axios.patch(
-        `http://localhost:5000/api/goals/comment/${id}`,
+        `goal-tracker-hackathon-production.up.railway.app/api/goals/comment/${id}`,
         {
           managerComment
         },
@@ -102,7 +102,7 @@ function ManagerDashboard() {
       const token = localStorage.getItem("token");
 
       await axios.patch(
-        `http://localhost:5000/api/goals/unlock/${id}`,
+        `goal-tracker-hackathon-production.up.railway.app/api/goals/unlock/${id}`,
         {},
         {
           headers: {

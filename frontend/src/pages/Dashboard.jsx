@@ -30,7 +30,7 @@ function Dashboard() {
       const token = localStorage.getItem("token");
 
       const response = await axios.get(
-        "http://localhost:5000/api/goals",
+        "goal-tracker-hackathon-production.up.railway.app/api/goals",
         {
           headers: {
             authorization: token
@@ -54,7 +54,7 @@ function Dashboard() {
       const token = localStorage.getItem("token");
 
       await axios.post(
-        "http://localhost:5000/api/goals",
+        "goal-tracker-hackathon-production.up.railway.app/api/goals",
         {
           title,
           description,
@@ -90,7 +90,7 @@ function Dashboard() {
       const token = localStorage.getItem("token");
 
       await axios.patch(
-        `http://localhost:5000/api/goals/update/${id}`,
+        `goal-tracker-hackathon-production.up.railway.app/api/goals/update/${id}`,
         {
           actualAchievement,
           checkInStatus
