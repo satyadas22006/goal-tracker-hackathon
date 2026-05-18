@@ -17,7 +17,7 @@ function Login() {
     try {
 
       const response = await axios.post(
-        "goal-tracker-hackathon-production.up.railway.app/api/auth/login",
+        "https://goal-tracker-hackathon.vercel.app//api/auth/login",
         {
           email,
           password
@@ -29,9 +29,9 @@ function Login() {
         response.data.token
       );
 
-      const role = response.data.user.role;
-
-      if (role === "manager") {
+      if (
+        response.data.user.role === "manager"
+      ) {
 
         navigate("/manager");
 
@@ -48,62 +48,55 @@ function Login() {
       alert("Invalid Credentials");
 
     }
+
   };
 
   return (
-    <div className="min-h-screen bg-black text-white flex items-center justify-center">
+    <div style={{ padding: "40px" }}>
 
-      <div className="bg-zinc-900 p-10 rounded-2xl w-[400px]">
+      <nav style={{ marginBottom: "30px" }}>
 
-        <h1 className="text-4xl font-bold mb-8 text-center">
+        <Link to="/login">
           Login
-        </h1>
+        </Link>
 
-        <input
-          className="w-full p-3 rounded bg-zinc-800 mb-4"
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) =>
-            setEmail(e.target.value)
-          }
-        />
+        {" | "}
 
-        <input
-          className="w-full p-3 rounded bg-zinc-800 mb-6"
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) =>
-            setPassword(e.target.value)
-          }
-        />
+        <Link to="/register">
+          Register
+        </Link>
 
-        <button
-          onClick={handleLogin}
-          className="w-full bg-blue-500 py-3 rounded-lg text-lg font-semibold"
-        >
+      </nav>
 
-          Login
+      <h1>Login</h1>
 
-        </button>
+      <br />
 
-        <p className="mt-6 text-center text-zinc-400">
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) =>
+          setEmail(e.target.value)
+        }
+      />
 
-          Don't have an account?
+      <br /><br />
 
-          <Link
-            to="/register"
-            className="text-blue-400 ml-2"
-          >
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) =>
+          setPassword(e.target.value)
+        }
+      />
 
-            Register
+      <br /><br />
 
-          </Link>
-
-        </p>
-
-      </div>
+      <button onClick={handleLogin}>
+        Login
+      </button>
 
     </div>
   );

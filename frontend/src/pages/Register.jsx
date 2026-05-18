@@ -4,109 +4,126 @@ import { Link, useNavigate } from "react-router-dom";
 
 import axios from "axios";
 
-function Login() {
+function Register() {
 
   const navigate = useNavigate();
+
+  const [name, setName] = useState("");
 
   const [email, setEmail] = useState("");
 
   const [password, setPassword] = useState("");
 
-  const handleLogin = async () => {
+  const [role, setRole] =
+    useState("employee");
+
+  const handleRegister = async () => {
 
     try {
 
-      const response = await axios.post(
-        "goal-tracker-hackathon-production.up.railway.app/api/auth/login",
+      await axios.post(
+        "https://goal-tracker-hackathon.vercel.app//api/auth/register",
         {
+          name,
           email,
-          password
+          password,
+          role
         }
       );
 
-      localStorage.setItem(
-        "token",
-        response.data.token
-      );
+      alert("Registration Successful");
 
-      const role = response.data.user.role;
-
-      if (role === "manager") {
-
-        navigate("/manager");
-
-      } else {
-
-        navigate("/dashboard");
-
-      }
+      navigate("/login");
 
     } catch (error) {
 
       console.log(error.response.data);
 
-      alert("Invalid Credentials");
+      alert("Registration Failed");
 
     }
+
   };
 
   return (
-    <div className="min-h-screen bg-black text-white flex items-center justify-center">
+    <div style={{ padding: "40px" }}>
 
-      <div className="bg-zinc-900 p-10 rounded-2xl w-[400px]">
+      <nav style={{ marginBottom: "30px" }}>
 
-        <h1 className="text-4xl font-bold mb-8 text-center">
+        <Link to="/login">
           Login
-        </h1>
+        </Link>
 
-        <input
-          className="w-full p-3 rounded bg-zinc-800 mb-4"
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) =>
-            setEmail(e.target.value)
-          }
-        />
+        {" | "}
 
-        <input
-          className="w-full p-3 rounded bg-zinc-800 mb-6"
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) =>
-            setPassword(e.target.value)
-          }
-        />
+        <Link to="/register">
+          Register
+        </Link>
 
-        <button
-          onClick={handleLogin}
-          className="w-full bg-blue-500 py-3 rounded-lg text-lg font-semibold"
-        >
+      </nav>
 
-          Login
+      <h1>Register</h1>
 
-        </button>
+      <br />
 
-        <p className="mt-6 text-center text-zinc-400">
+      <input
+        type="text"
+        placeholder="Name"
+        value={name}
+        onChange={(e) =>
+          setName(e.target.value)
+        }
+      />
 
-          Don't have an account?
+      <br /><br />
 
-          <Link
-            to="/register"
-            className="text-blue-400 ml-2"
-          >
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) =>
+          setEmail(e.target.value)
+        }
+      />
 
-            Register
+      <br /><br />
 
-          </Link>
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) =>
+          setPassword(e.target.value)
+        }
+      />
 
-        </p>
+      <br /><br />
 
-      </div>
+      <select
+        value={role}
+        onChange={(e) =>
+          setRole(e.target.value)
+        }
+      >
+
+        <option value="employee">
+          Employee
+        </option>
+
+        <option value="manager">
+          Manager
+        </option>
+
+      </select>
+
+      <br /><br />
+
+      <button onClick={handleRegister}>
+        Register
+      </button>
 
     </div>
   );
 }
 
-export default Login;
+export default Register;

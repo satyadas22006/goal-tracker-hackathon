@@ -20,10 +20,11 @@ function ManagerDashboard() {
 
     try {
 
-      const token = localStorage.getItem("token");
+      const token =
+        localStorage.getItem("token");
 
       const response = await axios.get(
-        "goal-tracker-hackathon-production.up.railway.app/api/goals/all",
+        "https://goal-tracker-hackathon.vercel.app//api/goals/all",
         {
           headers: {
             authorization: token
@@ -38,16 +39,18 @@ function ManagerDashboard() {
       console.log(error);
 
     }
+
   };
 
   const approveGoal = async (id) => {
 
     try {
 
-      const token = localStorage.getItem("token");
+      const token =
+        localStorage.getItem("token");
 
       await axios.patch(
-        `goal-tracker-hackathon-production.up.railway.app/api/goals/approve/${id}`,
+        `https://goal-tracker-hackathon.vercel.app//api/goals/approve/${id}`,
         {},
         {
           headers: {
@@ -63,6 +66,7 @@ function ManagerDashboard() {
       console.log(error);
 
     }
+
   };
 
   const addComment = async (
@@ -72,10 +76,11 @@ function ManagerDashboard() {
 
     try {
 
-      const token = localStorage.getItem("token");
+      const token =
+        localStorage.getItem("token");
 
       await axios.patch(
-        `goal-tracker-hackathon-production.up.railway.app/api/goals/comment/${id}`,
+        `https://goal-tracker-hackathon.vercel.app//api/goals/comment/${id}`,
         {
           managerComment
         },
@@ -93,16 +98,18 @@ function ManagerDashboard() {
       console.log(error.response.data);
 
     }
+
   };
 
   const unlockGoal = async (id) => {
 
     try {
 
-      const token = localStorage.getItem("token");
+      const token =
+        localStorage.getItem("token");
 
       await axios.patch(
-        `goal-tracker-hackathon-production.up.railway.app/api/goals/unlock/${id}`,
+        `https://goal-tracker-hackathon.vercel.app//api/goals/unlock/${id}`,
         {},
         {
           headers: {
@@ -118,6 +125,7 @@ function ManagerDashboard() {
       console.log(error.response.data);
 
     }
+
   };
 
   const logout = () => {
@@ -157,7 +165,9 @@ function ManagerDashboard() {
           <p>Status: {goal.status}</p>
 
           <p>
-            Employee: {goal.employeeId?.name}
+            Employee:
+            {" "}
+            {goal.employeeId?.name}
           </p>
 
           <br />
@@ -189,6 +199,7 @@ function ManagerDashboard() {
 
           <p>
             Comment:
+            {" "}
             {goal.managerComment}
           </p>
 
